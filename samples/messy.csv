@@ -1,0 +1,12 @@
+order_id,customer,amount,order_date,shipped,notes
+1001,Ana,25.50,2026-01-03,yes,
+1002,Ben,19.99,2026-01-04,no,"gift, wrapped"
+1003,Cara,,2026-01-04,yes,NA
+1004,Dev,abc,2026-01-05,yes,"said ""thanks"""
+1005,Eli,31.00,2026-01-05,no,
+1002,Ben,19.99,2026-01-04,no,"gift, wrapped"
+1006,Fay,27.25,2026-01-06,yes
+1007,Gus,9999.00,2026-01-07,yes,
+1008,Hal,22.10,2026-01-08,no,
+1009,Ivy,24.00,2026-01-09,yes,
+1010,Jo,26.40,2026-01-10,yes,

@@ -1,0 +1,21 @@
+{
+  "file": "messy.csv",
+  "rows": 11,
+  "malformed_rows": 1,
+  "duplicate_rows": 1,
+  "seconds": 0.01,
+  "columns": [
+    {"name": "order_id", "type": "integer", "empty": 0, "distinct": 9, "type_violations": 0, "min": 1001.00, "max": 1010.00, "mean": 1005.10, "outliers": 0},
+    {"name": "customer", "type": "text", "empty": 0, "distinct": 9, "type_violations": 0, "min": "Ana", "max": "Jo", "mean": null, "outliers": 0},
+    {"name": "amount", "type": "text", "empty": 1, "distinct": 8, "type_violations": 0, "min": "19.99", "max": "abc", "mean": null, "outliers": 0},
+    {"name": "order_date", "type": "date", "empty": 0, "distinct": 7, "type_violations": 0, "min": "2026-01-03", "max": "2026-01-10", "mean": null, "outliers": 0},
+    {"name": "shipped", "type": "boolean", "empty": 0, "distinct": 2, "type_violations": 0, "min": "no", "max": "yes", "mean": null, "outliers": 0},
+    {"name": "notes", "type": "text", "empty": 7, "distinct": 2, "type_violations": 0, "min": "gift, wrapped", "max": "said \"thanks\"", "mean": null, "outliers": 0}
+  ],
+  "issues": [
+    {"level": "error", "column": "", "message": "1 rows have the wrong number of fields (first at line 8)"},
+    {"level": "warning", "column": "", "message": "1 rows are exact duplicates of an earlier row"},
+    {"level": "warning", "column": "amount", "message": "10.0% of values are empty (1)"},
+    {"level": "warning", "column": "notes", "message": "70.0% of values are empty (7)"}
+  ]
+}
