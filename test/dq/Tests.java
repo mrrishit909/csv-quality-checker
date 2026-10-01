@@ -92,7 +92,7 @@ public final class Tests {
         check(msgs.get(0).startsWith("error"), "errors sort first");
         check(msgs.stream().anyMatch(m -> m.contains("city every value is the same")), "constant column reported");
         check(msgs.stream().noneMatch(m -> m.contains("likely ID")), "id has a duplicate, so it is not called a key");
-        check(Report.json(p).contains("\"duplicate_rows\": 1") && Report.html(p).contains("1 duplicate rows"), "JSON and HTML reports carry the numbers");
+        check(Report.json(p).contains("\"duplicate_rows\": 1") && Report.json(p).contains("\"max\": 202") && Report.html(p).contains("1 duplicate rows"), "JSON and HTML reports carry the numbers");
     }
 
     public static void main(String[] args) throws Exception {

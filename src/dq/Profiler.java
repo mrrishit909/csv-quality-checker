@@ -84,7 +84,7 @@ public final class Profiler {
     public List<Issue> issues() {
         List<Issue> out = new ArrayList<>();
         if (malformed > 0) out.add(new Issue("error", "", String.format("%,d rows have the wrong number of fields (first at line %d)", malformed, malformedLines.get(0))));
-        if (duplicates > 0) out.add(new Issue("warning", "", String.format("%,d rows are exact duplicates of an earlier row", duplicates)));
+        if (duplicates > 0) out.add(new Issue("warning", "", String.format("%,d rows repeat an earlier row exactly; with no ID column, check whether they are copies or different records that look alike", duplicates)));
         for (int i = 0; i < columns.size(); i++) {
             ColumnProfile c = columns.get(i);
             double emptyPct = c.rows == 0 ? 0 : 100.0 * c.empty / c.rows;

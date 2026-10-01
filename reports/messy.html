@@ -24,7 +24,7 @@ td.bar{width:110px}td.bar i{display:block;height:6px;border-radius:3px;backgroun
 <p class="cap">CSV data-quality report</p><h1>messy.csv</h1><p class="cap">11 rows · 6 columns · 1 malformed · 1 duplicate rows · checked in 0.0 s</p>
 <h2>Findings</h2><ul>
 <li class=error><b>error</b>1 rows have the wrong number of fields (first at line 8)</li>
-<li class=warning><b>warning</b>1 rows are exact duplicates of an earlier row</li>
+<li class=warning><b>warning</b>1 rows repeat an earlier row exactly; with no ID column, check whether they are copies or different records that look alike</li>
 <li class=warning><b>warning</b><span>amount</span>10.0% of values are empty (1)</li>
 <li class=warning><b>warning</b><span>notes</span>70.0% of values are empty (7)</li>
 </ul>

@@ -1,0 +1,35 @@
+{
+  "file": "202608-divvy-tripdata.csv",
+  "rows": 868191,
+  "malformed_rows": 0,
+  "duplicate_rows": 0,
+  "seconds": 7.61,
+  "columns": [
+    {"name": "ride_id", "type": "text", "empty": 0, "distinct": 868191, "type_violations": 0, "min": "0000293002A15ABB", "max": "FFFFF7C38B96DB72", "mean": null, "outliers": 0},
+    {"name": "rideable_type", "type": "text", "empty": 0, "distinct": 2, "type_violations": 0, "min": "classic_bike", "max": "electric_bike", "mean": null, "outliers": 0},
+    {"name": "started_at", "type": "datetime", "empty": 0, "distinct": 867912, "type_violations": 0, "min": "2026-07-30 23:01:41.716", "max": "2026-08-31 23:55:36.979", "mean": null, "outliers": 0},
+    {"name": "ended_at", "type": "datetime", "empty": 0, "distinct": 867903, "type_violations": 0, "min": "2026-08-01 00:00:03.314", "max": "2026-08-31 23:59:43.005", "mean": null, "outliers": 0},
+    {"name": "start_station_name", "type": "text", "empty": 189327, "distinct": 1581, "type_violations": 0, "min": "2112 W Peterson Ave", "max": "Yates Blvd & 93rd St", "mean": null, "outliers": 0},
+    {"name": "start_station_id", "type": "text", "empty": 189327, "distinct": 1574, "type_violations": 0, "min": "CHI00005", "max": "CHI02407", "mean": null, "outliers": 0},
+    {"name": "end_station_name", "type": "text", "empty": 197920, "distinct": 1584, "type_violations": 0, "min": "2112 W Peterson Ave", "max": "Yates Blvd & 75th St", "mean": null, "outliers": 0},
+    {"name": "end_station_id", "type": "text", "empty": 197920, "distinct": 1577, "type_violations": 0, "min": "CHI00005", "max": "CHI02407", "mean": null, "outliers": 0},
+    {"name": "start_lat", "type": "decimal", "empty": 0, "distinct": 1612, "type_violations": 0, "min": 41.64850076266409, "max": 42.07, "mean": 41.907188864496945, "outliers": 38041},
+    {"name": "start_lng", "type": "decimal", "empty": 0, "distinct": 1610, "type_violations": 0, "min": -87.91, "max": -87.52, "mean": -87.64690903346337, "outliers": 31877},
+    {"name": "end_lat", "type": "decimal", "empty": 683, "distinct": 1629, "type_violations": 0, "min": 41.59, "max": 42.19, "mean": 41.907582923967006, "outliers": 38230},
+    {"name": "end_lng", "type": "decimal", "empty": 683, "distinct": 1622, "type_violations": 0, "min": -87.92, "max": -87.52, "mean": -87.6472946193415, "outliers": 33418},
+    {"name": "member_casual", "type": "text", "empty": 0, "distinct": 2, "type_violations": 0, "min": "casual", "max": "member", "mean": null, "outliers": 0}
+  ],
+  "issues": [
+    {"level": "warning", "column": "start_station_name", "message": "21.8% of values are empty (189,327)"},
+    {"level": "warning", "column": "start_station_id", "message": "21.8% of values are empty (189,327)"},
+    {"level": "warning", "column": "end_station_name", "message": "22.8% of values are empty (197,920)"},
+    {"level": "warning", "column": "end_station_id", "message": "22.8% of values are empty (197,920)"},
+    {"level": "info", "column": "ride_id", "message": "every value is unique: a likely ID / key column"},
+    {"level": "info", "column": "start_lat", "message": "38,041 values outside the usual range [41.812, 42.0047]"},
+    {"level": "info", "column": "start_lng", "message": "31,877 values outside the usual range [-87.705, -87.585]"},
+    {"level": "info", "column": "end_lat", "message": "683 empty values (0.08%)"},
+    {"level": "info", "column": "end_lat", "message": "38,230 values outside the usual range [41.812, 42.0047]"},
+    {"level": "info", "column": "end_lng", "message": "683 empty values (0.08%)"},
+    {"level": "info", "column": "end_lng", "message": "33,418 values outside the usual range [-87.705, -87.585]"}
+  ]
+}

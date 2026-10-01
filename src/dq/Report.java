@@ -32,7 +32,10 @@ public final class Report {
         return s == null ? "" : s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;");
     }
 
-    private static String jnum(double x) { return Double.isFinite(x) ? String.format(Locale.US, "%.6g", x) : "null"; }
+    private static String jnum(double x) {
+        if (!Double.isFinite(x)) return "null";
+        return x == Math.rint(x) && Math.abs(x) < 1e15 ? Long.toString((long) x) : Double.toString(x);
+    }
 
     public static String json(Profiler p) {
         StringBuilder b = new StringBuilder();
