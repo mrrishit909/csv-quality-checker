@@ -35,8 +35,42 @@ public final class Tests {
         check(threw, "unterminated quote is an error, not silent data loss");
     }
 
+    static ColumnProfile profile(String... values) {
+        ColumnProfile c = new ColumnProfile("x");
+        for (String v : values) c.add(v);
+        return c;
+    }
+
+    static void profileTests() {
+        check(profile("1", "2", "3").type() == ColumnProfile.Type.INTEGER, "integers");
+        check(profile("1.5", "2", "-3e2").type() == ColumnProfile.Type.DECIMAL, "decimals, including 2 and -3e2");
+        check(profile("2026-01-02", "2025-12-31").type() == ColumnProfile.Type.DATE, "ISO dates");
+        check(profile("2026-07-12 22:05:11.820").type() == ColumnProfile.Type.DATETIME, "date-times with milliseconds");
+        check(profile("yes", "No", "TRUE").type() == ColumnProfile.Type.BOOLEAN, "booleans");
+        check(profile("Tampa", "Miami").type() == ColumnProfile.Type.TEXT, "text");
+        ColumnProfile e = profile("1", "", "NA", " null ", "2");
+        check(e.empty == 3 && e.nonEmpty() == 2, "'', NA and null all count as empty");
+        String[] vals = new String[100];
+        for (int i = 0; i < 99; i++) vals[i] = String.valueOf(i);
+        vals[99] = "oops";
+        ColumnProfile v = profile(vals);
+        check(v.type() == ColumnProfile.Type.INTEGER && v.typeViolations() == 1 && v.violationExamples().equals(java.util.List.of("oops")),
+              "99 integers + 1 stray value: still INTEGER, 1 violation, example kept");
+        ColumnProfile half = profile("1", "2", "a", "b");
+        check(half.type() == ColumnProfile.Type.TEXT && half.typeViolations() == 0, "50/50 mix falls back to TEXT");
+        ColumnProfile s = profile("2", "4", "4", "4", "5", "5", "7", "9");
+        check(Math.abs(s.mean - 5) < 1e-9 && Math.abs(s.stdDev() - 2.138) < 1e-3 && s.min == 2 && s.max == 9, "mean, sample std dev, min, max");
+        check(s.distinctCount() == 5, "distinct count");
+        check(Math.abs(profile("1", "2", "3", "4", "5").quantile(0.25) - 2) < 1e-9, "quartile by linear interpolation");
+        LongSet set = new LongSet();
+        for (int i = 0; i < 100_000; i++) set.add(LongSet.hash("id" + i));
+        for (int i = 0; i < 100_000; i++) set.add(LongSet.hash("id" + i));
+        check(set.size() == 100_000, "LongSet keeps 100,000 distinct hashes through resizing and repeats");
+    }
+
     public static void main(String[] args) throws Exception {
         csvTests();
+        profileTests();
         System.out.printf("%d passed, %d failed%n", passed, failed);
         if (failed > 0) System.exit(1);
     }
