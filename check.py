@@ -54,7 +54,10 @@ def main(data, report):
                     hi[i] = v if hi[i] is None or v > hi[i] else hi[i]
 
     bad = []
+    compared = 0
     def same(what, java, py):
+        nonlocal compared
+        compared += 1
         ok = java == py if not isinstance(py, float) else (java is not None and math.isclose(java, py, rel_tol=1e-9, abs_tol=1e-9))
         if not ok:
             bad.append(f"{what}: java {java} vs python {py}")
@@ -82,7 +85,7 @@ def main(data, report):
     if bad:
         print("MISMATCH\n  " + "\n  ".join(bad))
         sys.exit(1)
-    print(f"  all {3 + 5 * n} comparable numbers agree (rows, malformed, duplicates; per column empty, distinct, min, max, mean)")
+    print(f"  all {compared} comparisons agree (rows, malformed, duplicates; per column empty, distinct, min, max; mean for numbers)")
 
 if __name__ == "__main__":
     main(sys.argv[1], sys.argv[2])

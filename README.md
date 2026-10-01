@@ -11,7 +11,8 @@ java -jar dq.jar data.csv                        # -> reports/data.html + report
 java -jar dq.jar data.csv --sep ';' --out out    # other separator / folder (--sep '\t' for tabs)
 ```
 Exit code: `0` clean, `1` warnings, `2` errors (malformed rows or an all-empty column), `64` bad arguments.
-A data pipeline can stop on a bad file with `java -jar dq.jar new.csv || exit 1`.
+A data pipeline can stop only on errors with `java -jar dq.jar new.csv; [ $? -lt 2 ] || exit 1`
+(warnings such as empty values are often expected; see the results below).
 
 Example output: [samples/reports/](samples/reports/) (real data, below) and [reports/messy.html](reports/messy.html)
 (an 11-row file with planted problems, [samples/messy.csv](samples/messy.csv)).
@@ -73,7 +74,7 @@ An empty-value warning is only a question; the answer comes from knowing what th
 python3 check.py samples/data/202608-divvy-tripdata.csv samples/reports/202608-divvy-tripdata.json
 ```
 On both real files, every row, malformed-row and duplicate count agreed, and so did each column's empty count,
-distinct count, min, max and mean (68 + 88 numbers). Outlier counts were exact in 15 of the 17 columns with more than
+distinct count, min and max, plus the mean of every number column (59 + 84 comparisons). Outlier counts were exact in 15 of the 17 columns with more than
 100,000 numbers. In the other two they were off by 1.6% (`start_lat`) and 2.1% (`DepDelay`): the sampled quartile
 landed one step from the exact one (`DepDelay` Q1 −6 vs −7 minutes), and many tied values crossed the fence.
 
